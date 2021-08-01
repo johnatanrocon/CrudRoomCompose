@@ -3,13 +3,19 @@ package br.com.jrocon.crudroomcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import br.com.jrocon.crudroomcompose.ui.theme.CrudRoomComposeTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,7 +23,13 @@ class MainActivity : ComponentActivity() {
             CrudRoomComposeTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+
+                    val navController: NavHostController = rememberNavController()
+
+                    NavHost(navController = navController, startDestination = "telaInicial") {
+                        composable("telaInicial") { TelaInicial(navController) }
+                    }
+
                 }
             }
         }
@@ -25,14 +37,21 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
+fun TelaInicial(navController: NavHostController) {
+    Scaffold(
+        topBar = {
+            TopAppBar(title = { Text(text = "APP CRUD") })
+        },
+        floatingActionButton = {
+            FloatingActionButton(onClick = {
+                navController.navigate("telaCadastrar")
+            }) {
+                Icon(Icons.Filled.Add, contentDescription = "")
+            }
+        },
+        content = {
+            Column() {
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    CrudRoomComposeTheme {
-        Greeting("Android")
-    }
+            }
+        })
 }
