@@ -1,5 +1,6 @@
 package br.com.jrocon.crudroomcompose.listagem
 
+import android.os.Bundle
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,14 +23,11 @@ fun TelaListagemScreen(
 ) {
     var cidades = viewModel.cidadesLista.observeAsState(listOf())
 
-
     LazyColumn() {
         itemsIndexed(items = cidades.value) { index, item ->
             meuCard(navController = navController, cidade = item)
         }
     }
-
-
 }
 
 
@@ -42,7 +40,10 @@ fun meuCard(navController: NavController, cidade: Cidades) {
             .height(100.dp)
             .padding(start = 10.dp, top = 10.dp, end = 10.dp)
             .clickable {
-
+                navController.currentBackStackEntry?.arguments = Bundle().apply {
+                    putParcelable("cidade", cidade)
+                }
+                navController.navigate("telaExibir")
             }
     ) {
         Column() {
