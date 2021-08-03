@@ -12,6 +12,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import br.com.jrocon.crudroomcompose.listagem.TelaListagemScreen
 import br.com.jrocon.crudroomcompose.telacadastro.TelaCadastrarScreen
 import br.com.jrocon.crudroomcompose.ui.theme.CrudRoomComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,7 +54,7 @@ fun TelaInicial(navController: NavHostController) {
         },
         content = {
             Column() {
-
+                TelaListagemScreen(navController = navController)
             }
         })
 }
