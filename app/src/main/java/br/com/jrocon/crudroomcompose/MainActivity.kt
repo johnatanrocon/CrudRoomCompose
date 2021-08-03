@@ -12,6 +12,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import br.com.jrocon.crudroomcompose.telacadastro.TelaCadastrarScreen
 import br.com.jrocon.crudroomcompose.ui.theme.CrudRoomComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,6 +29,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(navController = navController, startDestination = "telaInicial") {
                         composable("telaInicial") { TelaInicial(navController) }
+                        composable("telaCadastrar") { TelaCadastrarScreen(navController = navController) }
                     }
 
                 }
